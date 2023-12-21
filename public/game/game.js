@@ -13,7 +13,11 @@
         context.stroke();
     }
 
-    socket.on('draw', ({x, y}) => {
-            drawPoint(x, y)
+    socket.on('draw', ({ x, y }) => {
+        drawPoint(x, y)
     })
+
+    fetch("/points")
+        .then(res => res.json())
+        .then(points => points.forEach(({ x, y }) => drawPoint( x, y ))) 
 })()
