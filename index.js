@@ -18,4 +18,4 @@ app.use(express.static('public'));
 // app.get("/", (req, res) => res.send("Hello People!"))
 
 
-http.listen(port, () => console.log(`App is listen on: http://localhost${port}`))
+http.listen(port, () => console.log(`App is listen on: http://localhost:${port}`))
