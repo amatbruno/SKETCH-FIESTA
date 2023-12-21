@@ -32,6 +32,7 @@
 
 requestAnimationFrame(reDraw)
 
+
     socket.on('draw', ({ x, y, clicked }) => {
         drawPoint(x, y, clicked)
     })
