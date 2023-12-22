@@ -3,7 +3,7 @@
     const $canvas = document.querySelector(".c1");
     const context = $canvas.getContext('2d');
     const socket = io();
-    const dots = [];
+    let dots = [];
 
     const drawPoint = (x, y, clicked) => {
         dots.push({ x, y, clicked })
@@ -37,7 +37,12 @@ requestAnimationFrame(reDraw)
         drawPoint(x, y, clicked)
     })
 
+    socket.on('clear', () => {
+        context.clearRect(0, 0, $canvas.width, $canvas.height);
+        dots = [];
+    });
+
     fetch("/points")
         .then(res => res.json())
-        .then(points => points.forEach(({ x, y }) => drawPoint(x, y)))
+        .then(points => points.forEach(({ x, y, clicked }) => drawPoint(x, y, clicked)))
 })()

@@ -12,6 +12,16 @@ body {
 }
 
 .c1 {
-    border: 5px black solid;
+    border: 4px black solid;
     background: white;
+}
+
+.btn-clear {
+    background-color: whitesmoke;
+    padding: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border: 3px black solid;
+    text-decoration: none;
+    color: black;
 }

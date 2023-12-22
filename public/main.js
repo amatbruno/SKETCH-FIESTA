@@ -2,8 +2,19 @@
 (function () {
     const $canvas = document.querySelector(".c1");
     const context = $canvas.getContext('2d');
+    const $btnClear = document.querySelector(".btn-clear")
     const socket = io();
-    const dots = [];
+    let dots = [];
+
+    $btnClear.addEventListener("click", e => {
+        e.preventDefault();
+
+        context.clearRect(0, 0, $canvas.width, $canvas.height);
+        dots = [];
+        requestAnimationFrame(reDraw);
+
+        socket.emit('clear')
+    });
 
     const drawPoint = (x, y, clicked) => {
         dots.push({ x, y, clicked })
@@ -30,7 +41,7 @@
         requestAnimationFrame(reDraw)
     }
 
-requestAnimationFrame(reDraw)
+    requestAnimationFrame(reDraw)
 
     $canvas.addEventListener("mousemove", e => {
         const { top, left } = $canvas.getBoundingClientRect();
@@ -38,7 +49,13 @@ requestAnimationFrame(reDraw)
         const x = e.pageX - left
         const clicked = e.buttons === 1;
 
-        socket.emit('draw', { x, y, clicked})
+        socket.emit('draw', { x, y, clicked })
         drawPoint(x, y, clicked)
+
+        socket.on('clear', () => {
+            context.clearRect(0, 0, $canvas.width, $canvas.height);
+            dots = [];
+            requestAnimationFrame(reDraw);
+        });
     })
 })()
