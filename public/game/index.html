@@ -9,10 +9,16 @@
 </head>
 
 <body>
-
     <canvas width="750" height="750" class="c1"></canvas>
 
-
+    <div class="chat">
+        <ul class="mssg-container">
+        </ul>
+        <form class="chat-form">
+            <input type="text" name="message">
+            <input type="submit">
+        </form>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="./game.js"></script>

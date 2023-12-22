@@ -1,6 +1,7 @@
 
 (function () {
     const $canvas = document.querySelector(".c1");
+    const $chatForm = document.querySelector(".chat-form");
     const context = $canvas.getContext('2d');
     const socket = io();
     let dots = [];
@@ -30,7 +31,7 @@
         requestAnimationFrame(reDraw)
     }
 
-requestAnimationFrame(reDraw)
+    requestAnimationFrame(reDraw)
 
 
     socket.on('draw', ({ x, y, clicked }) => {
@@ -45,4 +46,15 @@ requestAnimationFrame(reDraw)
     fetch("/points")
         .then(res => res.json())
         .then(points => points.forEach(({ x, y, clicked }) => drawPoint(x, y, clicked)))
+
+
+    $chatForm.addEventListener('submit', e => {
+        e.preventDefault()
+        const currentValue = document.querySelector('[name=message]').value;
+
+        if (currentValue === '') return;
+
+        console.log(currentValue)
+    })
+
 })()

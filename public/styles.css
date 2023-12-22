@@ -11,6 +11,16 @@ body {
     height: 100vh;
 }
 
+.chat {
+    background: whitesmoke;
+    height: 750px;
+}
+
+.chat input {
+    background: white;
+    color: black;
+}
+
 .c1 {
     border: 4px black solid;
     background: white;
