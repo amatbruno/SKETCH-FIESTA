@@ -10,6 +10,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    font-family: monospace;
 }
 
 .chat {
@@ -60,4 +61,24 @@ body {
     padding: 5px;
     margin-bottom: 5px;
     border-radius: 5px;
+}
+
+.btn-clear {
+    font-size: 15px;
+    padding: 7px 25px;
+    border: 1px white solid;
+    color: white;
+    border-radius: .5rem;
+}
+
+span {
+    background: whitesmoke;
+}
+
+#nickname {
+    font-size: 14px;
+}
+
+#mssg {
+    font-size: 14px;
 }

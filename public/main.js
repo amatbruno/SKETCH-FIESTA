@@ -2,9 +2,31 @@
 (function () {
     const $canvas = document.querySelector(".c1");
     const context = $canvas.getContext('2d');
+    const $chatForm = document.querySelector(".chat-form");
+    const $chatList = document.querySelector(".mssg-container");
     const $btnClear = document.querySelector(".btn-clear")
+    const $randomWord = document.getElementById("rndm-word")
     const socket = io();
     let dots = [];
+    const words = [
+        "Flower", "Sun", "Moon", "Star", "House", "Tree", "Cloud", "Fish", "Cat", "Dog",
+        "Butterfly", "Heart", "Car", "Plane", "Boat", "Apple", "Bird", "Frog", "Hat", "Cup",
+        "Clock", "Smiley Face", "Eye", "Ice Cream", "Clown", "Bicycle", "Balloon", "Dolphin",
+        "Turtle", "Bee", "House", "Mountain", "Spider", "Train", "Plant", "Robot", "Penguin",
+        "Elephant", "Dragon", "Starfish", "Guitar", "Lightning", "Mushroom", "Train", "Globe",
+        "Snowflake"
+    ];
+
+    function getRandomElement(array) {
+        const randomIndex = Math.floor(Math.random() * array.length);
+        return array[randomIndex];
+    }
+    function generateRandomWord() {
+        const randomWord = getRandomElement(words);
+        $randomWord.textContent = randomWord;
+    }
+    generateRandomWord()
+
 
     $btnClear.addEventListener("click", e => {
         e.preventDefault();
@@ -57,5 +79,37 @@
             dots = [];
             requestAnimationFrame(reDraw);
         });
+    })
+
+    socket.on("chat", ({ message }) => {
+        const newMessage = document.createElement('li');
+
+        const nickSpan = document.createElement("span");
+        const valueSpan = document.createElement("span");
+
+        // Separar el mensaje en currentNick y currentValue
+        const [currentNick, currentValue] = message.split(': ');
+
+        // Establecer el contenido y estilos para el currentNick y el currentValue
+        nickSpan.textContent = currentNick + ": ";
+        nickSpan.style.fontWeight = "bold";
+        valueSpan.textContent = currentValue;
+
+        // Agregar los elementos span al nuevo mensaje
+        newMessage.appendChild(nickSpan);
+        newMessage.appendChild(valueSpan);
+
+        // Agregar el nuevo mensaje al contenedor de mensajes
+        $chatList.appendChild(newMessage);
+    });
+
+    $chatForm.addEventListener('submit', e => {
+        e.preventDefault()
+        const currentValue = document.querySelector('[name=message]').value;
+        const currentNick = document.querySelector('[name=nick]').value;
+
+        if (currentValue === '') return;
+
+        socket.emit('chat', { message: `${currentNick}: ${currentValue}` })
     })
 })()

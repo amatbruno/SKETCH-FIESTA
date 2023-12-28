@@ -31,7 +31,6 @@
         })
         requestAnimationFrame(reDraw)
     }
-
     requestAnimationFrame(reDraw)
 
 
@@ -49,11 +48,27 @@
         .then(points => points.forEach(({ x, y, clicked }) => drawPoint(x, y, clicked)))
 
 
-    socket.on("chat", ({message}) => {
+    socket.on("chat", ({ message }) => {
         const newMessage = document.createElement('li');
-        newMessage.innerText = message;
+
+        const nickSpan = document.createElement("span");
+        const valueSpan = document.createElement("span");
+
+        // Separar el mensaje en currentNick y currentValue
+        const [currentNick, currentValue] = message.split(': ');
+
+        // Establecer el contenido y estilos para el currentNick y el currentValue
+        nickSpan.textContent = currentNick + ": ";
+        nickSpan.style.fontWeight = "bold";
+        valueSpan.textContent = currentValue;
+
+        // Agregar los elementos span al nuevo mensaje
+        newMessage.appendChild(nickSpan);
+        newMessage.appendChild(valueSpan);
+
+        // Agregar el nuevo mensaje al contenedor de mensajes
         $chatList.appendChild(newMessage);
-    })
+    });
 
     $chatForm.addEventListener('submit', e => {
         e.preventDefault()
@@ -64,5 +79,4 @@
 
         socket.emit('chat', { message: `${currentNick}: ${currentValue}` })
     })
-
 })()

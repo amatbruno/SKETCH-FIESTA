@@ -5,16 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Art-Attack</title>
+    <title>ArtAttack Drawer</title>
 </head>
 
 <body>
     <div class="paint-word">
-        <h1>EJEMPLO</h1>
+        <h1 id="rndm-word"></h1>
     </div>
 
-    <a href="" class="btn-clear">Clear Draw</a>
+    <button class="btn-clear">Clear Draw</button>
     <canvas width="750" height="750" class="c1"></canvas>
+
+    <div class="chat">
+        <input id="nickname" type="text" name="nick" placeholder="Your username" required>
+        <ul class="mssg-container">
+        </ul>
+        <form class="chat-form">
+            <input id="mssg" type="text" name="message" required>
+            <input type="submit" value="Send">
+        </form>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
