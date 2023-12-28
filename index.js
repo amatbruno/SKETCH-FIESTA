@@ -17,6 +17,10 @@ io.on("connection", function (socket) {
         dots = [];
         socket.broadcast.emit('clear');
     });
+
+    socket.on('chat', message => {
+        io.emit('chat', message)
+    })
 });
 
 

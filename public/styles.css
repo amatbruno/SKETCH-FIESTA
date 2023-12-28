@@ -1,7 +1,8 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: #4c4cbb
+    box-sizing: border-box;
+    background-color: #4c4cbb;
 }
 
 body {
@@ -13,25 +14,50 @@ body {
 
 .chat {
     background: whitesmoke;
+    width: 250px;
     height: 750px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: .5rem;
+    border: 2px black solid;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .chat input {
     background: white;
     color: black;
+    padding: 5px;
+}
+
+.chat-form {
+    background: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* Cambiado de fixed a absolute */
+    bottom: 0;
 }
 
 .c1 {
-    border: 4px black solid;
+    border: 3px black solid;
     background: white;
+    border-radius: .5rem;
 }
 
-.btn-clear {
+.mssg-container {
+    display: flex;
+    background: whitesmoke;
+    max-height: calc(600px - 60px);
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+.mssg-container li {
+    list-style: none;
     background-color: whitesmoke;
-    padding: 1rem;
-    font-weight: 600;
-    letter-spacing: 2px;
-    border: 3px black solid;
-    text-decoration: none;
-    color: black;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
 }
