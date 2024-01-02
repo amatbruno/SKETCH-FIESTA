@@ -6,11 +6,17 @@
 }
 
 body {
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     font-family: monospace;
+    overflow: hidden;
+}
+
+.paint-word {
+    z-index: 1;
 }
 
 #ex-text {
@@ -51,7 +57,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute; /* Cambiado de fixed a absolute */
+    position: absolute;
+    /* Cambiado de fixed a absolute */
     bottom: 0;
 }
 
@@ -63,6 +70,7 @@ body {
     border-radius: 3px;
     cursor: pointer;
 }
+
 .guessed:hover {
     background: rgb(107, 0, 0);
 }
@@ -71,6 +79,7 @@ body {
     border: 3px black solid;
     background: white;
     border-radius: .5rem;
+    z-index: 1;
 }
 
 .mssg-container {
@@ -91,10 +100,19 @@ body {
 
 .btn-clear {
     font-size: 15px;
+    height: 750px;
     padding: 7px 25px;
     border: 1px white solid;
     color: white;
+    background: transparent;
     border-radius: .5rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.btn-clear:hover {
+    background: rgb(110, 12, 12);
+    transition: all .4s ease-in-out;
 }
 
 span {
@@ -107,4 +125,37 @@ span {
 
 #mssg {
     font-size: 14px;
+}
+
+
+
+/*
+* SNOWFLAKES ANIMATION
+*/
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh);
+    }
+    100% {
+        transform: translateY(110vh);
+    }
 }

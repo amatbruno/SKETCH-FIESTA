@@ -39,6 +39,7 @@
         "Throwing fan in the garbage",
         "Baby shipped in a box"
     ];
+    
 
     //FUNCTION TO GET A RANDOM ELEMENT FROM THE ARRAY
     function getRandomElement(array) {
