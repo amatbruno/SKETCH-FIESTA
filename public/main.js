@@ -1,11 +1,13 @@
 
 (function () {
+    //CONSTANTS DEFINITION
     const $canvas = document.querySelector(".c1");
     const context = $canvas.getContext('2d');
     const $chatForm = document.querySelector(".chat-form");
     const $chatList = document.querySelector(".mssg-container");
     const $btnClear = document.querySelector(".btn-clear")
     const $randomWord = document.getElementById("rndm-word")
+    const $btnGuessed = document.querySelector(".guessed");
     const socket = io();
     let dots = [];
     const words = [
@@ -17,6 +19,7 @@
         "Snowflake"
     ];
 
+    //FUNCTION TO GET A RANDOM ELEMENT FROM THE ARRAY
     function getRandomElement(array) {
         const randomIndex = Math.floor(Math.random() * array.length);
         return array[randomIndex];
@@ -27,17 +30,20 @@
     }
     generateRandomWord()
 
-
+    //BUTTON FOR CLEAR DRAW
     $btnClear.addEventListener("click", e => {
         e.preventDefault();
 
+        //Here we clear the array with the coordinates of drawing and the canvas
         context.clearRect(0, 0, $canvas.width, $canvas.height);
         dots = [];
         requestAnimationFrame(reDraw);
 
+        //Emit the clear action to the server
         socket.emit('clear')
     });
 
+    //DRAWING SECTION
     const drawPoint = (x, y, clicked) => {
         dots.push({ x, y, clicked })
     }
@@ -81,35 +87,44 @@
         });
     })
 
+    //CHAT SECTION
     socket.on("chat", ({ message }) => {
         const newMessage = document.createElement('li');
-
         const nickSpan = document.createElement("span");
         const valueSpan = document.createElement("span");
 
-        // Separar el mensaje en currentNick y currentValue
+        // Nick and message separation
         const [currentNick, currentValue] = message.split(': ');
 
-        // Establecer el contenido y estilos para el currentNick y el currentValue
+        // Nick style
         nickSpan.textContent = currentNick + ": ";
         nickSpan.style.fontWeight = "bold";
         valueSpan.textContent = currentValue;
 
-        // Agregar los elementos span al nuevo mensaje
+        // Add below new message
         newMessage.appendChild(nickSpan);
         newMessage.appendChild(valueSpan);
 
-        // Agregar el nuevo mensaje al contenedor de mensajes
+        // Add the new mssg to the main chat
         $chatList.appendChild(newMessage);
     });
 
+    //SHOW THE MSSG
     $chatForm.addEventListener('submit', e => {
         e.preventDefault()
         const currentValue = document.querySelector('[name=message]').value;
         const currentNick = document.querySelector('[name=nick]').value;
 
+        //If it's null don't send anything
         if (currentValue === '') return;
 
         socket.emit('chat', { message: `${currentNick}: ${currentValue}` })
     })
+
+
+    $btnGuessed.addEventListener("click", function () {
+        socket.emit('correct', () => {
+            alert("The draw has been guessed")
+        })
+    });
 })()

@@ -21,6 +21,10 @@ io.on("connection", function (socket) {
     socket.on('chat', message => {
         io.emit('chat', message)
     })
+
+    socket.on('correct', () => {
+        socket.broadcast.emit('correct')
+    })
 });
 
 
