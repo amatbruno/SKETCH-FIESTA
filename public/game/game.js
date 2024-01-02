@@ -79,4 +79,16 @@
 
         socket.emit('chat', { message: `${currentNick}: ${currentValue}` })
     })
+
+    socket.on('connect', () => {
+        console.log('Connected to server');
+
+        socket.on('correct', () => {
+            console.log('Correct event received on the client (game.js)');
+            alert("The draw has been guessed");
+            dots = [];
+            context.clearRect(0, 0, $canvas.width, $canvas.height);
+            location.reload();
+        });
+    });
 })()

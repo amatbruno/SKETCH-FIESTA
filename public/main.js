@@ -11,12 +11,33 @@
     const socket = io();
     let dots = [];
     const words = [
-        "Flower", "Sun", "Moon", "Star", "House", "Tree", "Cloud", "Fish", "Cat", "Dog",
-        "Butterfly", "Heart", "Car", "Plane", "Boat", "Apple", "Bird", "Frog", "Hat", "Cup",
-        "Clock", "Smiley Face", "Eye", "Ice Cream", "Clown", "Bicycle", "Balloon", "Dolphin",
-        "Turtle", "Bee", "House", "Mountain", "Spider", "Train", "Plant", "Robot", "Penguin",
-        "Elephant", "Dragon", "Starfish", "Guitar", "Lightning", "Mushroom", "Train", "Globe",
-        "Snowflake"
+        "Superman vs Batman",
+        "Knives pointing at the cat",
+        "Elephant at a grocery store",
+        "Bear climbing tree",
+        "A lemon with teeth",
+        "Rabbit and tortoise fighting",
+        "Finding Nemo",
+        "Surfing on the beach",
+        "Donkey went McDonald",
+        "Pikachu started gyming",
+        "Nobita gets full marks",
+        "Throwing bottle out of the window",
+        "Pacman loves toast",
+        "Dog dancing at disc",
+        "The Eiffel tower at my house",
+        "Monkey riding a gator",
+        "A boy driving tesla",
+        "A man alone on Island",
+        "The ice cream was melting",
+        "Buffalo bathing in the lake",
+        "Snake with 3 heads",
+        "Rajoy shaving his head",
+        "Buying products from Amazon",
+        "Man eating mustard sauce",
+        "Attack on a castle",
+        "Throwing fan in the garbage",
+        "Baby shipped in a box"
     ];
 
     //FUNCTION TO GET A RANDOM ELEMENT FROM THE ARRAY
@@ -122,9 +143,20 @@
     })
 
 
-    $btnGuessed.addEventListener("click", function () {
-        socket.emit('correct', () => {
-            alert("The draw has been guessed")
-        })
+    socket.on('connect', () => {
+        console.log('Connected to server');
+
+        $btnGuessed.addEventListener("click", function () {
+            console.log('Button clicked');
+            socket.emit('correct');
+        });
+
+        socket.on('correct', () => {
+            console.log('Correct event received on the client');
+            alert("The draw has been guessed");
+            location.reload();
+        });
     });
+
+
 })()

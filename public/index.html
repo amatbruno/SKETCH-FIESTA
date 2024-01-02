@@ -10,7 +10,7 @@
 
 <body>
     <div class="paint-word">
-        <h1 id="rndm-word"></h1>
+        <span id="ex-text">HINT: </span><em><h1 id="rndm-word"></h1></em>
     </div>
 
     <button class="btn-clear">Clear Draw</button>
@@ -21,7 +21,7 @@
         <ul class="mssg-container">
         </ul>
         <form class="chat-form">
-            <input id="mssg" type="text" name="message" required>
+            <input id="mssg" type="text" name="message">
             <input type="submit" value="Send">
             <button class="guessed">Guessed</button>
         </form>
@@ -29,6 +29,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
+
 </body>
 
 </html>
