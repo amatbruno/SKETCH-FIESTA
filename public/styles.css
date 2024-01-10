@@ -17,10 +17,11 @@ body {
 
 .paint-word {
     z-index: 1;
+    background: transparent;
 }
 
 #ex-text {
-    background: none;
+    background: transparent;
     color: whitesmoke;
     width: 80px;
     font-size: 20px;
@@ -31,6 +32,7 @@ body {
     font-size: 18px;
     color: whitesmoke;
     margin-right: 10px;
+    background: transparent;
 }
 
 .chat {
@@ -99,7 +101,8 @@ body {
 }
 
 .btn-clear {
-    font-size: 15px;
+    font-size: 30px;
+    width: 12%;
     height: 750px;
     padding: 7px 25px;
     border: 1px white solid;
@@ -108,11 +111,12 @@ body {
     border-radius: .5rem;
     cursor: pointer;
     z-index: 1;
+    transition: all .35s ease-in-out;
 }
 
 .btn-clear:hover {
     background: rgb(110, 12, 12);
-    transition: all .4s ease-in-out;
+    transition: all .35s ease-in-out;
 }
 
 span {
@@ -125,6 +129,7 @@ span {
 
 #mssg {
     font-size: 14px;
+    margin-left: -10px;
 }
 
 
@@ -144,8 +149,8 @@ span {
 
 .snowflake {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
     background-color: #fff;
     border-radius: 50%;
     animation: fall linear infinite;
